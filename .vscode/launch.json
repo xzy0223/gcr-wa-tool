@@ -12,7 +12,8 @@
             "console": "integratedTerminal",
             "args": ["--db_name", "wa_tool_db",
                      "--table_name", "wa_ta_report",
-                     "--athena_result_url", "s3://aws-athena-query-results-us-west-2-935206693453/output/"
+                     "--athena_result_url", "s3://aws-athena-query-results-us-west-2-935206693453/output/",
+                     "--refined_report_output_url", "s3://wa-tool/refined-wa-ta-report/",
             ]
         }
     ]

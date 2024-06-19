@@ -70,7 +70,7 @@ with open('/home/ec2-user/wa-tool/custom_lens.json', 'r') as file:
     data = json.load(file)
 
 # 打开CSV文件并写入表头
-with open('/home/ec2-user/wa-tool/output.csv', 'w', newline='') as file:
+with open('./wa-issue-check.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['Pillar', 'Question', 'Choice', 'TA Check'])
 

@@ -276,5 +276,14 @@ if __name__ == '__main__':
     refined_report_header = ['pillar', 'question', 'choice', 'ta check', 'service_name', 'resource']
 
     # 生成精炼后的报告
-    generate_report(athena, db_name, table_name, athena_result_url, bedrock, prompt_tpl, headers, refined_report_header,
-                    refined_report_output_url)
+    generate_report(
+        athena, 
+        db_name, 
+        table_name, 
+        athena_result_url, 
+        bedrock, 
+        prompt_tpl, 
+        headers, 
+        refined_report_header,
+        refined_report_output_url
+        )

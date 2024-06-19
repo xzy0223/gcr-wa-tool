@@ -6,6 +6,9 @@ import json
 import logging
 import re
 import time
+import signal
+import sys
+import threading
 from io import StringIO
 from urllib.parse import urlparse
 
@@ -25,6 +28,19 @@ model_id = 'anthropic.claude-3-haiku-20240307-v1:0'
 # 读取提示模板文件
 with open('prompt.tpl', 'r', encoding='utf-8') as f:
     prompt_tpl = f.read()
+
+# 定义一个事件对象,用于通知线程退出
+exit_event = threading.Event()
+
+# 定义信号处理函数
+def signal_handler(sig, frame):
+    print('Received signal, exiting gracefully...')
+    exit_event.set()  # 设置事件,通知线程退出
+    sys.exit(0)
+
+# 注册信号处理函数
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 
 def get_csv_header(athena_client, db_name, table_name):
@@ -130,6 +146,9 @@ def process_row(row, bedrock_client, prompt_tpl, headers, refined_csv_header):
     :param refined_csv_header: 精炼后的 CSV 表头
     :return: 处理后的行数据
     """
+    if exit_event.is_set():  # 检查是否收到退出信号
+        return None  # 如果收到信号,返回None,不再处理
+    
     refined_row = {}
     for field in refined_csv_header:
         if field != 'resource' and field != 'service_name':
@@ -220,13 +239,16 @@ def generate_report(
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = []
             for row in csv_reader:
+                if exit_event.is_set():  # 检查是否收到退出信号
+                    break  # 如果收到信号,跳出循环,不再提交新任务
                 future = executor.submit(process_row, row, bedrock_client, prompt_tpl, headers, refined_csv_header)
                 futures.append(future)
 
             for future in concurrent.futures.as_completed(futures):
                 refined_row = future.result()
-                print(refined_row)
-                csv_writer.writerow(refined_row)
+                if refined_row:  # 如果结果不为None,才写入CSV
+                    print(refined_row)
+                    csv_writer.writerow(refined_row)
 
     # 上传精炼后的报告到 S3
     result_bucket_name, result_prefix = refined_report_output_url.strip('s3://').strip('/').split('/', 1)

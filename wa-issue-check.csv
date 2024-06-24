@@ -1,4 +1,4 @@
-Pillar,Question,Choice,TA Check
+pillar,question,choice,ta_check
 Security,SEC 1 How do you securely operate your workload?,P0 Secure account root user and properties,MFA on Root Account
 Security,SEC 1 How do you securely operate your workload?,P0 Secure account root user and properties,IAM Password Policy
 Security,SEC 2 How do you manage identities for people and machines?,"P0 Use strong sign-in mechanisms - Enforce MFA for root account , power user accounts",MFA on Root Account
@@ -146,7 +146,7 @@ Reliability,REL 7 How do you design your workload to adapt to changes in demand?
 Reliability,REL 7 How do you design your workload to adapt to changes in demand?,P1 Obtain resources upon detection of impairment to a workload,
 Reliability,REL 9 How do you back up data?,"P0 Identify and back up all data that needs to be backed up, or reproduce the data from sources",Understand and use the backup capabilities of the data services and resources used by the workload
 Reliability,REL 9 How do you back up data?,P0 Secure and encrypt backups,Control and detect access to backups using authentication and authorization
-Reliability,REL 9 How do you back up data?,P0 Secure and encrypt backups,Prevent and detect if data integrity of backups is compromised using encryption.
+Reliability,REL 9 How do you back up data?,P0 Secure and encrypt backups,Prevent and detect if data integrity of backups is compromised using encryption
 Reliability,REL 9 How do you back up data?,P0 Perform data backup automatically,Amazon RDS Backups
 Reliability,REL 9 How do you back up data?,P0 Perform data backup automatically,Amazon S3 Bucket Versioning
 Reliability,REL 9 How do you back up data?,P0 Perform data backup automatically,Amazon EBS Snapshots
@@ -158,7 +158,7 @@ Reliability,REL 10 How do you use fault isolation to protect your workload?,P1 D
 Reliability,REL 10 How do you use fault isolation to protect your workload?,P1 Deploy the workload to multiple locations,AWS Lambda VPC-enabled Functions without Multi-AZ Redundancy
 Reliability,REL 11 How do you design your workload to withstand component failures?,P1 Monitor all components of the workload to detect failures,Amazon Route 53 Deleted Health Checks
 Reliability,REL 11 How do you design your workload to withstand component failures?,P1 Monitor all components of the workload to detect failures,Amazon S3 Bucket Logging
-Cost optimization,COST 4 How do you decommission resources?,P1 Track resources over their life time,Amazon RDS Idle DB Instances
+Cost optimization,COST 4 How do you decommission resources?,P1 Track resources over their life time,Trusted Advisor Checks: Amazon RDS Idle DB Instances
 Cost optimization,COST 4 How do you decommission resources?,P1 Track resources over their life time,Low Utilization Amazon EC2 Instances
 Cost optimization,COST 4 How do you decommission resources?,P1 Track resources over their life time,Underutilized Amazon EBS Volumes
 Cost optimization,COST 4 How do you decommission resources?,P1 Track resources over their life time,Idle Load Balancers

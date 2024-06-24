@@ -150,16 +150,20 @@ def process_row(row, bedrock_client, prompt_tpl, headers, refined_csv_header):
         return None  # 如果收到信号,返回None,不再处理
     
     refined_row = {}
+    have_br_processed = False
     for field in refined_csv_header:
         if field != 'resource' and field != 'service_name':
             refined_row[field] = row[field]
         else:
-            prompt = prompt_tpl.format(schema=headers, data=row.values())
-            br_output = get_resource_from_llm(bedrock_client, prompt, model_id)
-            service_name_field, service_name_result, resource_name_filed, resource_name_result = extract_resource(
+            if not have_br_processed:
+                prompt = prompt_tpl.format(schema=headers, data=row.values())
+                br_output = get_resource_from_llm(bedrock_client, prompt, model_id)
+                service_name_field, service_name_result, resource_name_filed, resource_name_result = extract_resource(
                 br_output)
-            refined_row[service_name_field] = service_name_result if service_name_result else ''
-            refined_row[resource_name_filed] = resource_name_result if resource_name_result else ''
+                refined_row[service_name_field] = service_name_result if service_name_result else ''
+                refined_row[resource_name_filed] = resource_name_result if resource_name_result else ''
+                have_br_processed = True
+
     return refined_row
 
 
@@ -273,7 +277,7 @@ if __name__ == '__main__':
 
     # 获取原始 CSV 表头
     headers = get_csv_header(athena, db_name, table_name)
-    refined_report_header = ['pillar', 'question', 'choice', 'ta check', 'service_name', 'resource']
+    refined_report_header = ['account_id', 'pillar', 'question', 'choice', 'ta_check', 'region', 'status', 'reason', 'service_name', 'resource', 'description']
 
     # 生成精炼后的报告
     generate_report(
@@ -287,3 +291,5 @@ if __name__ == '__main__':
         refined_report_header,
         refined_report_output_url
         )
+
+    print('Your refined TA report has been uploaded to {refined_report_output_url}'.format(refined_report_output_url=refined_report_output_url))

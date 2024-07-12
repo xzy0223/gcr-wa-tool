@@ -153,7 +153,10 @@ def process_row(row, bedrock_client, prompt_tpl, headers, refined_csv_header):
     have_br_processed = False
     for field in refined_csv_header:
         if field != 'resource' and field != 'service_name':
-            refined_row[field] = row[field]
+            if field == 'ta_check_description':
+                refined_row[field] = row[field].replace('\t\t', '\n')
+            else:
+                refined_row[field] = row[field]
         else:
             if not have_br_processed:
                 prompt = prompt_tpl.format(schema=headers, data=row.values())
@@ -277,7 +280,7 @@ if __name__ == '__main__':
 
     # 获取原始 CSV 表头
     headers = get_csv_header(athena, db_name, table_name)
-    refined_report_header = ['account_id', 'pillar', 'question', 'choice', 'ta_check', 'region', 'status', 'reason', 'service_name', 'resource', 'description']
+    refined_report_header = ['account_id', 'pillar', 'question', 'choice', 'ta_check', 'ta_check_description', 'region', 'status', 'reason', 'service_name', 'resource', 'description']
 
     # 生成精炼后的报告
     generate_report(

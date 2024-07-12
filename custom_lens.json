@@ -1074,10 +1074,10 @@
                             "id": "pillar_3_q11choice1",
                             "title": "P1 Deploy the workload to multiple locations",
                             "helpfulResource": {
-                                "displayText": "Trusted Advisor Checks: \nELB Cross-Zone Load Balancing xdeXZKIUy \n\nAmazon EC2 Availability Zone Balance wuy7G1zxql \n\nAmazon RDS Multi-AZ f2iK5R6Dep VPN Tunnel Redundancy S45wrEXrLz \n\nAWS Lambda VPC-enabled Functions without Multi-AZ Redundancy L4dfs2Q4C6\n\nDetails:\nDistribute workload data and resources across multiple Availability Zones or, where necessary, across AWS Regions. These locations can be as diverse as required.\n"
+                                "displayText": "Trusted Advisor Checks: \nELB Cross-Zone Load Balancing xdeXZKIUy \n\nAmazon EC2 Availability Zone Balance wuy7G1zxql \n\nAmazon RDS Multi-AZ f2iK5R6Dep \n\n VPN Tunnel Redundancy S45wrEXrLz \n\nAWS Lambda VPC-enabled Functions without Multi-AZ Redundancy L4dfs2Q4C6\n\nDetails:\nDistribute workload data and resources across multiple Availability Zones or, where necessary, across AWS Regions. These locations can be as diverse as required.\n"
                             },
                             "improvementPlan": {
-                                "displayText": "ELB Cross-Zone Load Balancing xdeXZKIUy \n\nAmazon EC2 Availability Zone Balance wuy7G1zxql \n\nAmazon RDS Multi-AZ f2iK5R6Dep VPN Tunnel Redundancy S45wrEXrLz \n\nAWS Lambda VPC-enabled Functions without Multi-AZ Redundancy L4dfs2Q4C6"
+                                "displayText": "ELB Cross-Zone Load Balancing xdeXZKIUy \n\nAmazon EC2 Availability Zone Balance wuy7G1zxql \n\nAmazon RDS Multi-AZ f2iK5R6Dep \n\n VPN Tunnel Redundancy S45wrEXrLz \n\nAWS Lambda VPC-enabled Functions without Multi-AZ Redundancy L4dfs2Q4C6"
                             }
                         },
                         {

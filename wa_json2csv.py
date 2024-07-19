@@ -112,7 +112,7 @@ def main():
                         # helpful_resource = get_ta_checks(client, trimed_ta_checks).strip().strip(';')
                         
                         for ta_check in trimed_ta_checks.split("\n\n"):
-                            if ta_check.strip() == None:
+                            if ta_check.strip() == None or ta_check.strip().startswith("*"):
                                 continue
 
                             refined_ta_ckeck = get_ta_checks(client, ta_check).strip()

@@ -110,6 +110,9 @@ def main():
                             trimed_ta_checks = match.group(1).strip()
                             #print(trimed_ta_checks)
                         # helpful_resource = get_ta_checks(client, trimed_ta_checks).strip().strip(';')
+
+                        else:
+                            continue
                         
                         for ta_check in trimed_ta_checks.split("\n\n"):
                             if ta_check.strip() == None or ta_check.strip().startswith("*"):

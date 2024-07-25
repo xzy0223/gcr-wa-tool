@@ -65,7 +65,7 @@ def main():
                 elif item['value'][0]=='Reason: ':
                         new_row['reason']=item['value'][1]
                 else:
-                        list.append(''.join(item['value']))
+                    list.append(''.join([str(value_item) for value_item in item['value']]))
             new_row['description'] = "; ".join(list)
 
             # 将格式化后的数据写入 CSV 缓冲区
